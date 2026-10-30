@@ -19,14 +19,13 @@
 	const vault = params.get('vault');
 	const file = params.get('file');
 	if (vault && file) {
-		const target = 'obsidian://open?vault=' + encodeURIComponent(vault) + '&file=' + encodeURIComponent(file);
+		const target = 'obsidian://open?vault=' + encodeURIComponent(vault) + '&file=' + encodeURIComponent(file) + '&paneType=tab';
 		document.getElementById('link').href = target;
 		document.getElementById('status').textContent = file;
 		location.replace(target);
 		// Schließe den Tab, sobald Obsidian übernommen hat; blockt der Browser das, bleibt der Hinweis stehen.
-		const autoClose = false;
 		setTimeout(() => {
-			if (autoClose) window.close();
+			window.close();
 			document.getElementById('status').textContent = 'In Obsidian geöffnet. Dieser Tab kann zu.';
 		}, 800);
 	} else {
