@@ -24,8 +24,9 @@
 		document.getElementById('status').textContent = file;
 		location.replace(target);
 		// Schließe den Tab, sobald Obsidian übernommen hat; blockt der Browser das, bleibt der Hinweis stehen.
+		const autoClose = false;
 		setTimeout(() => {
-			window.close();
+			if (autoClose) window.close();
 			document.getElementById('status').textContent = 'In Obsidian geöffnet. Dieser Tab kann zu.';
 		}, 800);
 	} else {
