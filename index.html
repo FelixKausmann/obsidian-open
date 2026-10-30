@@ -23,6 +23,11 @@
 		document.getElementById('link').href = target;
 		document.getElementById('status').textContent = file;
 		location.replace(target);
+		// Schließe den Tab, sobald Obsidian übernommen hat; blockt der Browser das, bleibt der Hinweis stehen.
+		setTimeout(() => {
+			window.close();
+			document.getElementById('status').textContent = 'In Obsidian geöffnet. Dieser Tab kann zu.';
+		}, 800);
 	} else {
 		document.getElementById('status').textContent = 'Kein Notizpfad im Link.';
 		document.getElementById('link').remove();
