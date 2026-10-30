@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>In Obsidian öffnen</title>
+<style>
+	body { font: 16px/1.6 system-ui, sans-serif; margin: 3rem 1rem; text-align: center; color: #222; background: #fff; }
+	a { color: #7c3aed; }
+</style>
+</head>
+<body>
+<p id="status">Öffne Obsidian …</p>
+<p><a id="link" href="#">Falls nichts passiert: hier klicken</a></p>
+<script>
+	// Leite #vault=…&file=… an obsidian://open weiter; der #-Teil verlässt den Browser nie.
+	const params = new URLSearchParams(location.hash.slice(1));
+	const vault = params.get('vault');
+	const file = params.get('file');
+	if (vault && file) {
+		const target = 'obsidian://open?vault=' + encodeURIComponent(vault) + '&file=' + encodeURIComponent(file);
+		document.getElementById('link').href = target;
+		document.getElementById('status').textContent = file;
+		location.replace(target);
+	} else {
+		document.getElementById('status').textContent = 'Kein Notizpfad im Link.';
+		document.getElementById('link').remove();
+	}
+</script>
+</body>
+</html>
